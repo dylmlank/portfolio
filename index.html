@@ -553,6 +553,14 @@
     }
     .pulse-slide.active { opacity: 1; }
 
+    .nebula-slideshow { position: relative; }
+    .nebula-slide {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity 0.8s ease;
+    }
+    .nebula-slide.active { opacity: 1; }
+
     /* ==================== PHILOSOPHY ==================== */
     #philosophy { background: var(--bg); }
 
@@ -1039,8 +1047,9 @@
       </div>
       <!-- FEATURED: Nebula -->
       <div class="project-card featured reveal-scale" style="transition-delay: 0.1s;">
-        <div class="project-preview">
-          <div class="project-preview-gradient" style="background: linear-gradient(135deg, #0a0f1e, #1a1035);">&#127756;</div>
+        <div class="project-preview nebula-slideshow">
+          <img src="img/nebula-1.png" class="nebula-slide active" alt="Nebula chat interface">
+          <img src="img/nebula-2.png" class="nebula-slide" alt="Nebula tool execution">
           <div class="project-overlay"></div>
           <span class="featured-badge">Featured</span>
           <span class="project-status status-complete">Complete</span>
@@ -1650,6 +1659,17 @@
         current = (current + 1) % pulseSlides.length;
         pulseSlides[current].classList.add('active');
       }, 3000);
+    }
+
+    // ==================== NEBULA SLIDESHOW ====================
+    const nebulaSlides = document.querySelectorAll('.nebula-slide');
+    if (nebulaSlides.length > 1) {
+      let nCurrent = 0;
+      setInterval(() => {
+        nebulaSlides[nCurrent].classList.remove('active');
+        nCurrent = (nCurrent + 1) % nebulaSlides.length;
+        nebulaSlides[nCurrent].classList.add('active');
+      }, 3500);
     }
   </script>
 
