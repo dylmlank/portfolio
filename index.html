@@ -542,6 +542,17 @@
       .project-card.featured .project-preview { min-height: 200px; }
     }
 
+    /* ==================== PULSE SLIDESHOW ==================== */
+    .pulse-slideshow {
+      position: relative;
+    }
+    .pulse-slide {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity 0.8s ease;
+    }
+    .pulse-slide.active { opacity: 1; }
+
     /* ==================== PHILOSOPHY ==================== */
     #philosophy { background: var(--bg); }
 
@@ -1048,8 +1059,10 @@
       </div>
       <!-- FEATURED: Pulse -->
       <div class="project-card featured reveal-scale" style="transition-delay: 0.2s;">
-        <div class="project-preview">
-          <div class="project-preview-gradient" style="background: linear-gradient(135deg, #0f1a0f, #1a2e1a);">&#128200;</div>
+        <div class="project-preview pulse-slideshow">
+          <img src="img/pulse-1.png" class="pulse-slide active" alt="Pulse sector heatmap">
+          <img src="img/pulse-2.png" class="pulse-slide" alt="Pulse stock screener">
+          <img src="img/pulse-3.png" class="pulse-slide" alt="Pulse stock analysis">
           <div class="project-overlay"></div>
           <span class="featured-badge">Featured</span>
           <span class="project-status status-complete">Complete</span>
@@ -1627,6 +1640,17 @@
         themeToggle.innerHTML = '&#9788;';
       }
     });
+
+    // ==================== PULSE SLIDESHOW ====================
+    const pulseSlides = document.querySelectorAll('.pulse-slide');
+    if (pulseSlides.length > 1) {
+      let current = 0;
+      setInterval(() => {
+        pulseSlides[current].classList.remove('active');
+        current = (current + 1) % pulseSlides.length;
+        pulseSlides[current].classList.add('active');
+      }, 3000);
+    }
   </script>
 
 </body>
